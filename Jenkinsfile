@@ -31,13 +31,15 @@ pipeline{
             }
         }
         stage('Test'){
-            script{
-                try{
-                    sh 'docker run --name $project $registry'
-                }
-                finally{
-                    sh 'docker rm -f $project'
-                }
+            steps{
+                script{
+                    try{
+                        sh 'docker run --name $project $registry'
+                    }
+                    finally{
+                        sh 'docker rm -f $project'
+                    }
+            }
             }
         }
         stage('Push Docker Image'){
