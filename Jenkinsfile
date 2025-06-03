@@ -34,10 +34,10 @@ pipeline{
             steps{
                 script{
                     try{
-                        sh 'docker run --name $project $registry'
+                        bat 'docker run --name $project $registry'
                     }
                     finally{
-                        sh 'docker rm -f $project'
+                        bat 'docker rm -f $project'
                     }
             }
             }
@@ -54,7 +54,7 @@ pipeline{
         stage('Cleaning up'){
             steps{
                 script{
-                    sh 'docker rmi $registry'
+                    bat 'docker rmi $registry'
                 }
             }
         }
