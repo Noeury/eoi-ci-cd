@@ -23,6 +23,24 @@ pipeline{
                 }
             }
         }
+        stage('Codo Analysis'){
+             environment{
+                scannerHome= tool 'Sonar'
+            }
+            steps{
+                script{
+                    withSonarQubeEnv('Sonar'){
+                        bat """
+                            "${scannerHome}\\bin\\sonar-scanner.bat" ^
+                            -Dsonar.projectKey=${project} ^
+                            -Dsonar.projectName=${project} ^
+                            -Dsonar.projectVersion=${projectVersion} ^
+                            -Dsonar.sources=.
+                        """
+                    }
+                }
+            }
+        }
         stage('Build Docker Image'){
             steps{
                 script {
@@ -62,6 +80,9 @@ pipeline{
     post{
         always{
             echo 'Registrar build'
+        }
+        faillure{
+            echo 'El pipeline ha fallado'
         }
     }
 }
