@@ -34,8 +34,7 @@ pipeline{
             steps{
                 script{
                     try{
-                        bat 'docker run --name %project% %registry%
-'
+                        bat 'docker run --name %project% %registry%'
                     }
                     finally{
                         bat 'docker rm -f %project%'
