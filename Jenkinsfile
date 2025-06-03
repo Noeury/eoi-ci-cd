@@ -1,4 +1,4 @@
-pipelins{
+pipeline{
     agent any
     environment{
         registry = 'noeury/eoi-act3-jenkins'
